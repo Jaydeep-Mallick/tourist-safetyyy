@@ -51,14 +51,29 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="login-page">
+      <h2>Welcome Back</h2>
+      <p className="login-subtitle">Sign in to continue</p>
+
       <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
       <input placeholder="Password" type="password" onChange={(e) => setPass(e.target.value)} />
-      <button onClick={login}>Login</button>
-      <p>or</p>
-      <button onClick={loginWithGoogle}>Continue with Google</button>
-      <p><Link to="/signup">Create account</Link></p>
+      <button onClick={login}>Sign In</button>
+
+      <p className="login-divider">OR</p>
+
+      <button onClick={loginWithGoogle} className="google-login-btn">
+        <img
+          className="google-mark-img"
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <span>Login with Google</span>
+      </button>
+
+      <p>
+        <Link to="/signup">Create account</Link>
+      </p>
     </div>
   );
 }
