@@ -5,8 +5,10 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 
 export default function App() {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
