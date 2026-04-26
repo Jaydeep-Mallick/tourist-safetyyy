@@ -1,14 +1,19 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useEffect, useState } from "react";
 import L from "leaflet";
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIcon2x,
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
+const markerSvg = encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="42" viewBox="0 0 24 36">
+    <path fill="#4e6de4" d="M12 0C5.93 0 1 4.93 1 11c0 8.6 11 25 11 25s11-16.4 11-25C23 4.93 18.07 0 12 0z"/>
+    <circle cx="12" cy="11" r="5" fill="#fff"/>
+  </svg>
+`);
+
+const mapMarkerIcon = L.icon({
+  iconUrl: `data:image/svg+xml,${markerSvg}`,
+  iconSize: [28, 42],
+  iconAnchor: [14, 42],
+  popupAnchor: [0, -36],
 });
 
 export default function MapView({ setLocation }) {
@@ -32,7 +37,7 @@ export default function MapView({ setLocation }) {
     <div className="map-frame">
       <MapContainer center={pos} zoom={13} className="dashboard-map">
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={pos}>
+        <Marker position={pos} icon={mapMarkerIcon}>
           <Popup>Your Location</Popup>
         </Marker>
       </MapContainer>
